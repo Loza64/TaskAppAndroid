@@ -1,4 +1,4 @@
-package com.project.taskappandroid
+package com.project.app
 
 import org.junit.Test
 

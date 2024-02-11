@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace = "com.project.taskappandroid"
+    namespace = "com.project.app"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.project.taskappandroid"
+        applicationId = "com.project.app"
         minSdk = 24
         targetSdk = 34
         versionCode = 1

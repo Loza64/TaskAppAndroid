@@ -13,5 +13,6 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "TaskAppAndroid"
+rootProject.name = "My Application"
 include(":app")
+ 
