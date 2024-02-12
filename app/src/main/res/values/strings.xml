@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">TaskAppAndroid</string>
+    <string name="title">Lista de tareas</string>
+    <string name="categories">Categories</string>
 </resources>
