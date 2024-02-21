@@ -13,4 +13,12 @@
         <item name="android:statusBarColor">@color/todo_background_todo_app</item>
         <!-- Customize your theme here. -->
     </style>
+
+    <style name="TaskSubtitle">
+        <item name="textAllCaps">true</item>
+        <item name="android:textColor">@color/todo_subtitle_text</item>
+        <item name="android:textSize">15sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_marginHorizontal">32dp</item>
+    </style>
 </resources>
