@@ -18,7 +18,7 @@
             android:id="@+id/colorTask"
             android:layout_width="32dp"
             android:layout_height="32dp"
-            android:background="@color/todo_business_category"
+            tools:background="@color/todo_business_category"
             android:layout_marginHorizontal="15dp"
             />
         <TextView
