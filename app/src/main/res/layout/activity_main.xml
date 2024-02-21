@@ -43,4 +43,10 @@
         android:text="@string/task"
         style="@style/TaskSubtitle"
         />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        />
 </LinearLayout>
