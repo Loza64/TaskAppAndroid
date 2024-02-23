@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="295dp"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@color/todo_background_todo_app"
+
+    >
+    <EditText
+        android:id="@+id/txtTask"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/white"
+        android:hint="Añadir una tarea"
+        android:textColorHint="@color/white"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        />
+    <RadioButton
+        android:id="@+id/rBtnBusiness"
+        style="@style/radioButton"
+        android:text="Negocios"
+        android:checked="true"
+        android:backgroundTint="@color/todo_business_category"
+        android:buttonTint="@color/todo_business_category"
+        />
+
+    <RadioButton
+        android:id="@+id/rBtnPersonal"
+        style="@style/radioButton"
+        android:text="Personal"
+        android:backgroundTint="@color/todo_personal_category"
+        android:buttonTint="@color/todo_personal_category"
+        />
+    <RadioButton
+        android:id="@+id/rBtnOthers"
+        style="@style/radioButton"
+        android:text="Otros"
+        android:backgroundTint="@color/todo_other_category"
+        android:buttonTint="@color/todo_other_category"
+        />
+</LinearLayout>

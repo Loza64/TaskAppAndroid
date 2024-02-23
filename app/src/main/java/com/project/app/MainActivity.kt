@@ -1,9 +1,11 @@
 package com.project.app
 
+import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.project.app.tools.CategorieAdapter
 
 class MainActivity : AppCompatActivity() {
@@ -16,6 +18,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var rvCategorie : RecyclerView
     private lateinit var categorieAdapter: CategorieAdapter
     private lateinit var rvTask: RecyclerView
+    private lateinit var fbtnNewTask: FloatingActionButton
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,6 +29,13 @@ class MainActivity : AppCompatActivity() {
     private fun initComponents() {
         rvCategorie = findViewById(R.id.rvCategorie)
         rvTask = findViewById(R.id.rvTask)
+        fbtnNewTask = findViewById(R.id.fbtnNewTask)
+    }
+
+    private fun showDialog(){
+        val dialog = Dialog(this)
+        dialog.setContentView(R.layout.dialog_task)
+        dialog.show()
     }
 
     private fun initUI() {
@@ -33,6 +43,9 @@ class MainActivity : AppCompatActivity() {
         categorieAdapter = CategorieAdapter(categorieList)
         rvCategorie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvCategorie.adapter = categorieAdapter
+        fbtnNewTask.setOnClickListener{
+            showDialog()
+        }
     }
 
 }
