@@ -63,7 +63,7 @@
         android:src="@drawable/ic_plus"
         app:tint="@color/white"
         app:fabSize="normal"
-        android:layout_gravity="end | bottom"
+        android:layout_gravity="end|bottom"
         android:layout_margin="20dp"
         />
 </FrameLayout>

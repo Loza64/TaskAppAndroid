@@ -17,27 +17,38 @@
         android:textColor="@color/white"
         android:textStyle="bold"
         />
-    <RadioButton
-        android:id="@+id/rBtnBusiness"
-        style="@style/radioButton"
-        android:text="Negocios"
-        android:checked="true"
-        android:backgroundTint="@color/todo_business_category"
-        android:buttonTint="@color/todo_business_category"
-        />
-
-    <RadioButton
-        android:id="@+id/rBtnPersonal"
-        style="@style/radioButton"
-        android:text="Personal"
-        android:backgroundTint="@color/todo_personal_category"
-        android:buttonTint="@color/todo_personal_category"
-        />
-    <RadioButton
-        android:id="@+id/rBtnOthers"
-        style="@style/radioButton"
-        android:text="Otros"
-        android:backgroundTint="@color/todo_other_category"
-        android:buttonTint="@color/todo_other_category"
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <RadioButton
+            android:id="@+id/rBtnBusiness"
+            style="@style/radioButton"
+            android:text="Negocios"
+            android:checked="true"
+            android:backgroundTint="@color/todo_business_category"
+            android:buttonTint="@color/todo_business_category"
+            />
+        <RadioButton
+            android:id="@+id/rBtnPersonal"
+            style="@style/radioButton"
+            android:text="Personal"
+            android:backgroundTint="@color/todo_personal_category"
+            android:buttonTint="@color/todo_personal_category"
+            />
+        <RadioButton
+            android:id="@+id/rBtnOthers"
+            style="@style/radioButton"
+            android:text="Otros"
+            android:backgroundTint="@color/todo_other_category"
+            android:buttonTint="@color/todo_other_category"
+            />
+    </RadioGroup>
+    <Button
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Tarea"
+        android:backgroundTint="@color/todo_accent"
+        android:layout_marginHorizontal="10dp"
         />
 </LinearLayout>
