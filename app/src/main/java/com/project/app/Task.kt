@@ -1,5 +1,3 @@
 package com.project.app
 
-class Task {
-    var name:String = ""
-}
+data class Task (var name:String, var color:Int)
