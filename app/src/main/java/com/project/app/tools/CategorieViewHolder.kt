@@ -10,7 +10,7 @@ import com.project.app.R
 class CategorieViewHolder(view:View) : RecyclerView.ViewHolder(view){
 
     private val tvCategorie:TextView = view.findViewById(R.id.tvCategorie)
-    private val divider:View  =view.findViewById(R.id.divider)
+    private val divider:View  = view.findViewById(R.id.divider)
 
     fun render(categorie: Categorie){
          when (categorie){

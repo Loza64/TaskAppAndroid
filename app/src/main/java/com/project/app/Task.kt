@@ -1,3 +1,3 @@
 package com.project.app
 
-data class Task (var name:String, var color:Int)
+data class Task (var name:String, var type: String)

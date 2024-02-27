@@ -3,6 +3,7 @@ package com.project.app
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
@@ -22,12 +23,13 @@ class MainActivity : AppCompatActivity() {
         Categorie.Others
     )
 
-    private val taskList:List<Task> = listOf<Task>()
+    private val taskList:List<Task> = listOf<Task>(Task("Practicar", "personal"))
 
     private lateinit var rvCategorie : RecyclerView
     private lateinit var categorieAdapter: CategorieAdapter
     private lateinit var rvTask: RecyclerView
     private lateinit var fbtnNewTask: FloatingActionButton
+    private lateinit var taskAdapter:TaskAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,27 +54,16 @@ class MainActivity : AppCompatActivity() {
         btnAddTask.setOnClickListener {
             val selectId = rgCategories.checkedRadioButtonId
             val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
-            val task: Task = when (getRadioBtnId.text){
-                "rBtnBusiness" -> {
-                    Task(
-                        txtTask.text.toString(),
-                        ContextCompat.getColor(this, R.color.todo_business_category)
-                    )
-                }
 
-                "rBtnPersonal" -> {
-                    Task(
-                        txtTask.text.toString(),
-                        ContextCompat.getColor(this, R.color.todo_personal_category)
-                    )
-                }
-
-                else -> Task(txtTask.text.toString(), ContextCompat.getColor(this, R.color.todo_other_category))
-
+            val task: Task = when (getRadioBtnId.text.toString()){
+                "rBtnBusiness" -> Task(txtTask.text.toString(), "business")
+                "rBtnPersonal" -> Task(txtTask.text.toString(), "personal")
+                else -> Task(txtTask.text.toString(), "others")
             }
 
             taskList.plus(task)
-            rvTask.adapter = TaskAdapter(taskList)
+            taskAdapter = TaskAdapter(taskList)
+            rvTask.adapter = taskAdapter
             dialog.dismiss()
         }
 
@@ -86,8 +77,9 @@ class MainActivity : AppCompatActivity() {
         rvCategorie.adapter = categorieAdapter
         fbtnNewTask.setOnClickListener{ showDialog() }
 
+        taskAdapter = TaskAdapter(taskList)
         rvTask.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rvTask.adapter = TaskAdapter(taskList)
+        rvTask.adapter = taskAdapter
     }
 
 }
