@@ -62,7 +62,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             taskList.plus(task)
+
             taskAdapter = TaskAdapter(taskList)
+            rvTask.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
             rvTask.adapter = taskAdapter
             dialog.dismiss()
         }

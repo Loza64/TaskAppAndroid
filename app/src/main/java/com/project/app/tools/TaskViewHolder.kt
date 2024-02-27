@@ -9,16 +9,23 @@ import com.project.app.Task
 
 class TaskViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
-    val colorTask:View = view.findViewById(R.id.colorTask)
+    val colorTask = view.findViewById<View>(R.id.colorTask)
     val tvTask = view.findViewById<TextView>(R.id.tvTask)
 
     fun render(task:Task){
-        val color = when (task.type){
-            "business" -> ContextCompat.getColor(colorTask.context, R.color.todo_business_category)
-            "personal" -> ContextCompat.getColor(colorTask.context, R.color.todo_personal_category)
-            else -> ContextCompat.getColor(colorTask.context, R.color.todo_other_category)
+
+        when (task.type){
+            "business" -> {
+                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_business_category))
+            }
+            "personal" -> {
+                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_personal_category))
+            }
+            else -> {
+                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_other_category))
+            }
         }
-        tvTask.setBackgroundColor(color)
+
         tvTask.text = task.name
     }
 }
