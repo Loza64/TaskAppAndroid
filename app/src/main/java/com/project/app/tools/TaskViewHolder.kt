@@ -16,13 +16,13 @@ class TaskViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
         when (task.type){
             "business" -> {
-                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_business_category))
+                colorTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_business_category))
             }
             "personal" -> {
-                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_personal_category))
+                colorTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_personal_category))
             }
             else -> {
-                tvTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_other_category))
+                colorTask.setBackgroundColor(ContextCompat.getColor(colorTask.context, R.color.todo_other_category))
             }
         }
 
