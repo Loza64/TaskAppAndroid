@@ -1,6 +1,7 @@
 package com.project.app.tools
 
 import android.content.res.ColorStateList
+import android.graphics.Paint
 import android.view.View
 import android.widget.CheckBox
 import android.widget.TextView
@@ -16,20 +17,18 @@ class TaskViewHolder(view:View) : RecyclerView.ViewHolder(view) {
 
     fun render(task:Task){
 
-        when (task.type){
-            "business" -> checkItemTask.buttonTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(checkItemTask.context, R.color.todo_business_category)
-            )
-
-            "personal" -> checkItemTask.buttonTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(checkItemTask.context, R.color.todo_personal_category)
-            )
-
-            else -> checkItemTask.buttonTintList = ColorStateList.valueOf(
-                ContextCompat.getColor(checkItemTask.context, R.color.todo_other_category)
-            )
+        val getColor = when (task.type) {
+            "business" -> ContextCompat.getColor(checkItemTask.context, R.color.todo_business_category)
+            "personal" -> ContextCompat.getColor(checkItemTask.context, R.color.todo_personal_category)
+            else -> ContextCompat.getColor(checkItemTask.context, R.color.todo_other_category)
         }
-
+        tvTask.paintFlags = if(task.isSelected){
+            tvTask.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+        }else{
+            tvTask.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+        }
+        checkItemTask.buttonTintList = ColorStateList.valueOf(getColor)
+        checkItemTask.isSelected = task.isSelected
         tvTask.text = task.name
     }
 }

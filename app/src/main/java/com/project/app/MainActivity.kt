@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         Categorie.Others
     )
 
-    private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", "personal"))
+    private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", "personal", false))
 
     private lateinit var rvCategorie : RecyclerView
     private lateinit var categorieAdapter: CategorieAdapter
@@ -56,9 +56,9 @@ class MainActivity : AppCompatActivity() {
             val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
 
             val task: Task = when (getRadioBtnId.text){
-                "Negocios" -> Task(txtTask.text.toString(), "business")
-                "Personal" -> Task(txtTask.text.toString(), "personal")
-                else -> Task(txtTask.text.toString(), "others")
+                "Negocios" -> Task(txtTask.text.toString(), "business", false)
+                "Personal" -> Task(txtTask.text.toString(), "personal", false)
+                else -> Task(txtTask.text.toString(), "others", false)
             }
             taskList.add(task)
             taskAdapter.notifyDataSetChanged()
