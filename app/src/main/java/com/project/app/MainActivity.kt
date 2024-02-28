@@ -23,7 +23,7 @@ class MainActivity : AppCompatActivity() {
         Categorie.Others
     )
 
-    private val taskList:List<Task> = listOf<Task>(Task("Practicar", "personal"))
+    private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", "personal"))
 
     private lateinit var rvCategorie : RecyclerView
     private lateinit var categorieAdapter: CategorieAdapter
@@ -55,20 +55,15 @@ class MainActivity : AppCompatActivity() {
             val selectId = rgCategories.checkedRadioButtonId
             val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
 
-            val task: Task = when (getRadioBtnId.text.toString()){
-                "rBtnBusiness" -> Task(txtTask.text.toString(), "business")
-                "rBtnPersonal" -> Task(txtTask.text.toString(), "personal")
+            val task: Task = when (getRadioBtnId.text){
+                "Negocios" -> Task(txtTask.text.toString(), "business")
+                "Personal" -> Task(txtTask.text.toString(), "personal")
                 else -> Task(txtTask.text.toString(), "others")
             }
-
-            taskList.plus(task)
-
-            taskAdapter = TaskAdapter(taskList)
-            rvTask.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-            rvTask.adapter = taskAdapter
-            dialog.dismiss()
+            taskList.add(task)
+            taskAdapter.notifyDataSetChanged()
+            dialog.hide()
         }
-
         dialog.show()
     }
 
@@ -80,7 +75,7 @@ class MainActivity : AppCompatActivity() {
         fbtnNewTask.setOnClickListener{ showDialog() }
 
         taskAdapter = TaskAdapter(taskList)
-        rvTask.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvTask.layoutManager = LinearLayoutManager(this)
         rvTask.adapter = taskAdapter
     }
 
