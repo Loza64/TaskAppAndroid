@@ -28,7 +28,7 @@ class TaskViewHolder(view:View) : RecyclerView.ViewHolder(view) {
             tvTask.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
         }
         checkItemTask.buttonTintList = ColorStateList.valueOf(getColor)
-        checkItemTask.isSelected = task.isSelected
+        checkItemTask.isChecked = task.isSelected
         tvTask.text = task.name
     }
 }

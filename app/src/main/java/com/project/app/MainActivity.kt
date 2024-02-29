@@ -52,17 +52,19 @@ class MainActivity : AppCompatActivity() {
         val rgCategories = dialog.findViewById<RadioGroup>(R.id.rgCategories)
 
         btnAddTask.setOnClickListener {
-            val selectId = rgCategories.checkedRadioButtonId
-            val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
+            if(txtTask.text.isNotEmpty()){
+                val selectId = rgCategories.checkedRadioButtonId
+                val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
 
-            val task: Task = when (getRadioBtnId.text){
-                "Negocios" -> Task(txtTask.text.toString(), "business", false)
-                "Personal" -> Task(txtTask.text.toString(), "personal", false)
-                else -> Task(txtTask.text.toString(), "others", false)
+                val task: Task = when (getRadioBtnId.text){
+                    "Negocios" -> Task(txtTask.text.toString(), "business", false)
+                    "Personal" -> Task(txtTask.text.toString(), "personal", false)
+                    else -> Task(txtTask.text.toString(), "others", false)
+                }
+                taskList.add(task)
+                taskAdapter.notifyDataSetChanged()
+                dialog.hide()
             }
-            taskList.add(task)
-            taskAdapter.notifyDataSetChanged()
-            dialog.hide()
         }
         dialog.show()
     }
@@ -74,9 +76,16 @@ class MainActivity : AppCompatActivity() {
         rvCategorie.adapter = categorieAdapter
         fbtnNewTask.setOnClickListener{ showDialog() }
 
-        taskAdapter = TaskAdapter(taskList)
+        taskAdapter = TaskAdapter(taskList){
+            position -> onItemSelected(position)
+        }
         rvTask.layoutManager = LinearLayoutManager(this)
         rvTask.adapter = taskAdapter
+    }
+
+    private fun onItemSelected(position: Int){
+        taskList[position].isSelected = !taskList[position].isSelected
+        taskAdapter.notifyDataSetChanged()
     }
 
 }
