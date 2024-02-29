@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.project.app.Categorie
 import com.project.app.R
 
-class CategorieAdapter(private val categorie:List<Categorie>) : RecyclerView.Adapter<CategorieViewHolder>() {
+class CategorieAdapter(private val categorie:List<Categorie>, private val categorieSelected: (Int) -> Unit) : RecyclerView.Adapter<CategorieViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CategorieViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_categorie, parent, false)
@@ -17,6 +17,9 @@ class CategorieAdapter(private val categorie:List<Categorie>) : RecyclerView.Ada
 
     override fun onBindViewHolder(holder: CategorieViewHolder, position: Int) {
         holder.render(categorie[position])
+        holder.itemView.setOnClickListener{
+            categorieSelected(position)
+        }
     }
 
 }

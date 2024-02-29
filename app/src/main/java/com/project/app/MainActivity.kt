@@ -3,12 +3,10 @@ package com.project.app
 import android.app.Dialog
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
 import android.widget.Button
 import android.widget.EditText
 import android.widget.RadioButton
 import android.widget.RadioGroup
-import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.floatingactionbutton.FloatingActionButton
@@ -18,9 +16,9 @@ import com.project.app.tools.TaskAdapter
 class MainActivity : AppCompatActivity() {
 
     private val categorieList = listOf(
-        Categorie.Business,
-        Categorie.Personal,
-        Categorie.Others
+        Categorie("business", false),
+        Categorie("personal", false),
+        Categorie("others", false)
     )
 
     private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", "personal", false))
@@ -71,21 +69,28 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUI() {
         initComponents()
-        categorieAdapter = CategorieAdapter(categorieList)
+        categorieAdapter = CategorieAdapter(categorieList){
+            position -> categorieSelected(position)
+        }
         rvCategorie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         rvCategorie.adapter = categorieAdapter
         fbtnNewTask.setOnClickListener{ showDialog() }
 
         taskAdapter = TaskAdapter(taskList){
-            position -> onItemSelected(position)
+            position -> taskSelected(position)
         }
         rvTask.layoutManager = LinearLayoutManager(this)
         rvTask.adapter = taskAdapter
     }
 
-    private fun onItemSelected(position: Int){
+    private fun taskSelected(position: Int){
         taskList[position].isSelected = !taskList[position].isSelected
         taskAdapter.notifyDataSetChanged()
+    }
+
+    private fun categorieSelected(position: Int){
+        categorieList[position].isSelected = !categorieList[position].isSelected
+        categorieAdapter.notifyItemChanged(position)
     }
 
 }
