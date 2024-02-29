@@ -7,6 +7,7 @@ import android.widget.CheckBox
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.RecyclerView
+import com.project.app.Categorie
 import com.project.app.R
 import com.project.app.Task
 
@@ -18,8 +19,8 @@ class TaskViewHolder(view:View) : RecyclerView.ViewHolder(view) {
     fun render(task:Task){
 
         val getColor = when (task.type) {
-            "business" -> ContextCompat.getColor(checkItemTask.context, R.color.todo_business_category)
-            "personal" -> ContextCompat.getColor(checkItemTask.context, R.color.todo_personal_category)
+            Categorie.Business -> ContextCompat.getColor(checkItemTask.context, R.color.todo_business_category)
+            Categorie.Personal -> ContextCompat.getColor(checkItemTask.context, R.color.todo_personal_category)
             else -> ContextCompat.getColor(checkItemTask.context, R.color.todo_other_category)
         }
         tvTask.paintFlags = if(task.isSelected){

@@ -15,22 +15,22 @@ class CategorieViewHolder(view:View) : RecyclerView.ViewHolder(view){
     private val itemCategorie:CardView = view.findViewById(R.id.itemCategorie)
 
     fun render(categorie: Categorie){
-         when (categorie.name){
-             "personal" ->{
+         when (categorie){
+             Categorie.Personal ->{
                  tvCategorie.text = "Personal"
                  divider.setBackgroundColor( ContextCompat.getColor(divider.context, R.color.todo_personal_category))
              }
-             "business" ->{
+             Categorie.Business ->{
                  tvCategorie.text = "Negocio"
                  divider.setBackgroundColor( ContextCompat.getColor(divider.context, R.color.todo_business_category))
              }
-             "others" -> {
+             Categorie.Other -> {
                  tvCategorie.text = "Otros"
                  divider.setBackgroundColor( ContextCompat.getColor(divider.context, R.color.todo_other_category))
              }
          }
 
-        val stateColor = if(!categorie.isSelected){
+        val stateColor = if(!categorie.isDisabled){
             ContextCompat.getColor(itemCategorie.context, R.color.todo_background_card)
         }else{
             ContextCompat.getColor(itemCategorie.context, R.color.todo_background_disabled)

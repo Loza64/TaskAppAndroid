@@ -15,13 +15,13 @@ import com.project.app.tools.TaskAdapter
 
 class MainActivity : AppCompatActivity() {
 
-    private val categorieList = listOf(
-        Categorie("business", false),
-        Categorie("personal", false),
-        Categorie("others", false)
+    private val categorieList = mutableListOf(
+        Categorie.Personal,
+        Categorie.Business,
+        Categorie.Other
     )
 
-    private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", "personal", false))
+    private val taskList:MutableList<Task> = mutableListOf(Task("Practicar", Categorie.Personal, false))
 
     private lateinit var rvCategorie : RecyclerView
     private lateinit var categorieAdapter: CategorieAdapter
@@ -55,11 +55,12 @@ class MainActivity : AppCompatActivity() {
                 val getRadioBtnId = rgCategories.findViewById<RadioButton>(selectId)
 
                 val task: Task = when (getRadioBtnId.text){
-                    "Negocios" -> Task(txtTask.text.toString(), "business", false)
-                    "Personal" -> Task(txtTask.text.toString(), "personal", false)
-                    else -> Task(txtTask.text.toString(), "others", false)
+                    "Negocios" -> Task(txtTask.text.toString(), Categorie.Business, false)
+                    "Personal" -> Task(txtTask.text.toString(), Categorie.Personal, false)
+                    else -> Task(txtTask.text.toString(), Categorie.Other, false)
                 }
                 taskList.add(task)
+                taskAdapter.list = taskList
                 taskAdapter.notifyDataSetChanged()
                 dialog.hide()
             }
@@ -89,8 +90,13 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun categorieSelected(position: Int){
-        categorieList[position].isSelected = !categorieList[position].isSelected
+        categorieList[position].isDisabled = !categorieList[position].isDisabled
         categorieAdapter.notifyItemChanged(position)
+
+        val selectCategories = categorieList.filterNot { it.isDisabled }
+        val newTaskList = taskList.filter { selectCategories.contains(it.type) }
+        taskAdapter.list = newTaskList.toMutableList()
+        taskAdapter.notifyDataSetChanged()
     }
 
 }
