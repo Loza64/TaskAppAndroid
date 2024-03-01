@@ -41,6 +41,13 @@ class MainActivity : AppCompatActivity() {
         fbtnNewTask = findViewById(R.id.fbtnNewTask)
     }
 
+    private fun filterEnableCategories(){
+        val selectCategories = categorieList.filterNot { it.isDisabled }
+        val newTaskList = taskList.filter { selectCategories.contains(it.type) }
+        taskAdapter.list = newTaskList.toMutableList()
+        taskAdapter.notifyDataSetChanged()
+    }
+
     private fun showDialog(){
         val dialog = Dialog(this)
         dialog.setContentView(R.layout.dialog_task)
@@ -60,28 +67,11 @@ class MainActivity : AppCompatActivity() {
                     else -> Task(txtTask.text.toString(), Categorie.Other, false)
                 }
                 taskList.add(task)
-                taskAdapter.list = taskList
-                taskAdapter.notifyDataSetChanged()
+                filterEnableCategories()
                 dialog.hide()
             }
         }
         dialog.show()
-    }
-
-    private fun initUI() {
-        initComponents()
-        categorieAdapter = CategorieAdapter(categorieList){
-            position -> categorieSelected(position)
-        }
-        rvCategorie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
-        rvCategorie.adapter = categorieAdapter
-        fbtnNewTask.setOnClickListener{ showDialog() }
-
-        taskAdapter = TaskAdapter(taskList){
-            position -> taskSelected(position)
-        }
-        rvTask.layoutManager = LinearLayoutManager(this)
-        rvTask.adapter = taskAdapter
     }
 
     private fun taskSelected(position: Int){
@@ -89,14 +79,24 @@ class MainActivity : AppCompatActivity() {
         taskAdapter.notifyDataSetChanged()
     }
 
-    private fun categorieSelected(position: Int){
+    private fun categorySelected(position: Int){
         categorieList[position].isDisabled = !categorieList[position].isDisabled
         categorieAdapter.notifyItemChanged(position)
-
-        val selectCategories = categorieList.filterNot { it.isDisabled }
-        val newTaskList = taskList.filter { selectCategories.contains(it.type) }
-        taskAdapter.list = newTaskList.toMutableList()
-        taskAdapter.notifyDataSetChanged()
+        filterEnableCategories()
     }
 
+    private fun initUI() {
+        initComponents()
+
+        //Categories list
+        categorieAdapter = CategorieAdapter(categorieList){ position -> categorySelected(position) }
+        rvCategorie.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
+        rvCategorie.adapter = categorieAdapter
+        fbtnNewTask.setOnClickListener{ showDialog() }
+
+        //Tasks list
+        taskAdapter = TaskAdapter(taskList){ position -> taskSelected(position) }
+        rvTask.layoutManager = LinearLayoutManager(this)
+        rvTask.adapter = taskAdapter
+    }
 }
